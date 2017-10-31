@@ -1,5 +1,7 @@
 package com.example.joseramos.lyricsappjlrf.data.repository
 
+import com.example.joseramos.lyricsappjlrf.data.api.model.BaseResponse
+import com.example.joseramos.lyricsappjlrf.data.api.model.GetTopSongsResponse
 import com.example.joseramos.lyricsappjlrf.data.repository.datasource.MusicCloudDataSource
 import com.example.joseramos.lyricsappjlrf.data.repository.mappers.MusicDataMapper
 import com.example.joseramos.lyricsappjlrf.domain.models.TrackModel
@@ -18,10 +20,10 @@ class MusicRepositoryImpl @Inject constructor(val musicCloudDataSource: MusicClo
                         throw  Exception("Error while calling the API ")
                     }
                     val models: MutableList<TrackModel> = mutableListOf()
+                    val trackList = response.body().message.body.trackList
 
-                    val tracksResponse = response.body().copy()
-                    for (track in tracksResponse.message.body.trackList){
-                        models.add(dataMapper.convert(track))
+                    for (trackWrapper in trackList) {
+                        models.add(dataMapper.convert(trackWrapper.track))
                     }
                     models
                 }

@@ -4,7 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class GetTopSongsResponse constructor(
         @SerializedName("track_list")
-        val trackList: List<TrackResponse>)
+        val trackList: List<TrackWrapper>)
+
+data class TrackWrapper constructor(
+        @SerializedName("track")
+        val track: TrackResponse)
 
 data class TrackResponse constructor(
         @SerializedName("track_id")
@@ -60,7 +64,7 @@ data class TrackResponse constructor(
         @SerializedName("track_edit_url")
         val trackEditUrl: String,
         @SerializedName("commontrack_vanity_id")
-        val commontrackVanityId: String,
+        val commonTrackVanityId: String,
         @SerializedName("first_release_date")
         val firstReleaseDate: String,
         @SerializedName("updated_time")
