@@ -1,0 +1,76 @@
+allprojects {
+    repositories {
+        jcenter()
+        google()
+    }
+}
+ext {
+    //Android
+    androidBuildToolsVersion = "26.0.2"
+    androidMinSdkVersion = 19
+    androidTargetSdkVersion = 25
+    androidCompileSdkVersion = 26
+    androidApplicationId = 'com.answerfinancial.streetwise'
+    androidVersionCode = 2
+    androidVersionName = "1.0.0"
+    testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+    testApplicationId = 'com.example.joseramos.lyricsappjlrf'
+
+    supportLibsVersion          = "26.1.0"
+    constraintLayoutVersion     = "1.0.2"
+    multiDexVersion             = "1.0.1"
+    archRoomVersion             = "1.0.0-beta1"
+    playServicesVersion         = "11.0.4"
+    dagger2Version              = "2.12"
+    gsonVersion                 = "2.8.1"
+    retrofitVersion             = "2.2.0"
+    okHttpVersion               = "3.7.0"
+    picassoVersion              = "2.5.2"
+    rxjava2Version              = "2.1.5"
+    rxAndroidVersion            = "2.0.1"
+    jodaTimeVersion             = "2.9.9"
+    jUnitVersion                = "4.12"
+    mockitoVersion              = "2.10.0"
+    mockitokotlinVersion        = "1.5.0"
+    kotlinVersion               = "1.1.51"
+    espressoCoreVersion         = "2.2.2"
+    AndroidDataBindingVersion   = "3.0.0"
+
+    dependencies = [
+            ConstraintLayout        : "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
+            MultiDex                : "com.android.support:multidex:${multiDexVersion}",
+            SupportV4               : "com.android.support:support-v4:${supportLibsVersion}",
+            AppCompatV7             : "com.android.support:appcompat-v7:${supportLibsVersion}",
+            CardViewV7              : "com.android.support:cardview-v7:${supportLibsVersion}",
+            CustomTabs              : "com.android.support:customtabs:${supportLibsVersion}",
+            SupportDesign           : "com.android.support:design:${supportLibsVersion}",
+            ArchRoomRuntime         : "android.arch.persistence.room:runtime:${archRoomVersion}",
+            ArchRoomRxJava2         : "android.arch.persistence.room:rxjava2:${archRoomVersion}",
+            PlayServicesMaps        : "com.google.android.gms:play-services-maps:${playServicesVersion}",
+            PlayServicesLocation    : "com.google.android.gms:play-services-location:${playServicesVersion}",
+            GcmPlayServices         : "com.google.android.gms:play-services-gcm:${playServicesVersion}",
+            Dagger2                 : "com.google.dagger:dagger:${dagger2Version}",
+            Dagger2Compiler         : "com.google.dagger:dagger-compiler:${dagger2Version}",
+            Gson                    : "com.google.code.gson:gson:${gsonVersion}",
+            Retrofit                : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            RetrofitConverterGson   : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            RetrofitAdapterRxJava2  : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            OkHttp                  : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            OkHttpInterceptor       : "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+            Picasso                 : "com.squareup.picasso:picasso:${picassoVersion}",
+            RxJava2                 : "io.reactivex.rxjava2:rxjava:${rxjava2Version}",
+            RxAndroid               : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            RoomCompiler            : "android.arch.persistence.room:compiler:${archRoomVersion}",
+            KotlinStdLib            : "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
+            AndroidDatabinding      : "com.android.databinding:compiler:${AndroidDataBindingVersion}"
+    ]
+
+    testDependencies = [
+            JUnit                   : "junit:junit:${jUnitVersion}",
+            Mockito                 : "org.mockito:mockito-core:${mockitoVersion}",
+            MockitoKotlin           : "com.nhaarman:mockito-kotlin:${mockitokotlinVersion}",
+            KotlinReflect           : "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}",
+            EspressoCore            : "com.android.support.test.espresso:espresso-core:${espressoCoreVersion}"
+    ]
+
+}

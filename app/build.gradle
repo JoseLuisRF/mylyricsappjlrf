@@ -1,36 +1,98 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 26
+
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+
+//    sourceSets {
+//        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+//        main.java.srcDirs += [file("$buildDir/generated/source/kapt/main")]
+//    }
+
     defaultConfig {
-        applicationId "com.example.joseramos.lyricsappjlrf"
-        minSdkVersion 19
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary= true
+
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+        applicationId globalConfiguration.getAt("androidApplicationId")
+        versionCode globalConfiguration.getAt("androidVersionCode")
+        versionName globalConfiguration.getAt("androidVersionName")
+        multiDexEnabled true
+        testInstrumentationRunner globalConfiguration.getAt("testInstrumentationRunner")
+        testApplicationId globalConfiguration.getAt("testApplicationId")
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
+
     buildTypes {
         release {
+            debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            debuggable true
+            minifyEnabled false
+            applicationIdSuffix ".debug"
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
         }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support:design:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.android.support:support-vector-drawable:26.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    def dependencies = rootProject.ext.dependencies
+    def testDependencies = rootProject.ext.testDependencies
+
+    implementation dependencies.ConstraintLayout
+    implementation dependencies.SupportV4
+    implementation dependencies.AppCompatV7
+    implementation dependencies.CardViewV7
+    implementation dependencies.CustomTabs
+    implementation dependencies.SupportDesign
+    implementation dependencies.ArchRoomRuntime
+    implementation dependencies.ArchRoomRxJava2
+    implementation dependencies.PlayServicesLocation
+    implementation dependencies.Dagger2
+    implementation dependencies.Gson
+    implementation dependencies.Picasso
+    implementation dependencies.Retrofit
+    implementation dependencies.RetrofitConverterGson
+    implementation dependencies.RetrofitAdapterRxJava2
+    implementation dependencies.OkHttp
+    implementation dependencies.OkHttpInterceptor
+    implementation dependencies.RxJava2
+    implementation dependencies.RxAndroid
+    implementation dependencies.KotlinStdLib
+
+    kapt dependencies.RoomCompiler
+    kapt dependencies.Dagger2Compiler
+    kapt dependencies.AndroidDatabinding
+
+    testImplementation testDependencies.JUnit
+    testImplementation testDependencies.MockitoKotlin
+
+    androidTestImplementation(testDependencies.EspressoCore, {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
 }
