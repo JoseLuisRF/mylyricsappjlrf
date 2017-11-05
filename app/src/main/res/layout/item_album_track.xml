@@ -22,7 +22,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@color/cardview_dark_background" />
+            app:srcCompat="@color/cardview_dark_background"
+            imageUrl="@{model.albumImageUrl}"/>
 
         <TextView
             android:id="@+id/tv_artist_name"
