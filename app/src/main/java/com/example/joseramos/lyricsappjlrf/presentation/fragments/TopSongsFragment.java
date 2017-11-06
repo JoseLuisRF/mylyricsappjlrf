@@ -64,12 +64,20 @@ public class TopSongsFragment extends BaseFragment implements TopSongsView {
     @Override
     public void onSuccessSongsLoaded(List<? extends TrackModel> trackModels) {
         adapter = new TracksAdapter((List<TrackModel>) trackModels);
+        adapter.setTrackAdapterListener(trackModelTracksAdapterListener);
         binding.rvTopSongs.setAdapter(adapter);
     }
 
     @Override
     public void showError(Throwable throwable) {
         throwable.printStackTrace();
-        Snackbar.make(binding.getRoot(),throwable.getMessage(), Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(binding.getRoot(), throwable.getMessage(), Snackbar.LENGTH_SHORT).show();
     }
+
+    private TracksAdapter.TracksAdapterListener<TrackModel> trackModelTracksAdapterListener = new TracksAdapter.TracksAdapterListener<TrackModel>() {
+        @Override
+        public void onItemClick(View view, int position, TrackModel item) {
+            navigator.navigateToSecondLevelActivity(item.getTrackId());
+        }
+    };
 }

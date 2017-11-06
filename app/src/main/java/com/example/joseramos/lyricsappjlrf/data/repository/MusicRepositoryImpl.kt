@@ -1,9 +1,9 @@
 package com.example.joseramos.lyricsappjlrf.data.repository
 
-import com.example.joseramos.lyricsappjlrf.data.api.model.BaseResponse
-import com.example.joseramos.lyricsappjlrf.data.api.model.GetTopSongsResponse
 import com.example.joseramos.lyricsappjlrf.data.repository.datasource.MusicCloudDataSource
+import com.example.joseramos.lyricsappjlrf.data.repository.datasource.MusicDiskDataSource
 import com.example.joseramos.lyricsappjlrf.data.repository.mappers.MusicDataMapper
+import com.example.joseramos.lyricsappjlrf.domain.models.LyricsModel
 import com.example.joseramos.lyricsappjlrf.domain.models.TrackModel
 import com.example.joseramos.lyricsappjlrf.domain.repository.MusicRepository
 import io.reactivex.Flowable
@@ -11,9 +11,10 @@ import java.lang.Exception
 import javax.inject.Inject
 
 class MusicRepositoryImpl @Inject constructor(val musicCloudDataSource: MusicCloudDataSource,
+                                              val musicDiskDataSource: MusicDiskDataSource,
                                               val dataMapper: MusicDataMapper) : MusicRepository {
 
-    override fun getTopSongs(): Flowable<List<TrackModel>> {
+    override fun fetchTopSongs(): Flowable<List<TrackModel>> {
         return musicCloudDataSource.getTopSongs("mx")
                 .map { response ->
                     if (!response.isSuccessful) {
@@ -29,4 +30,37 @@ class MusicRepositoryImpl @Inject constructor(val musicCloudDataSource: MusicClo
                 }
     }
 
+    override fun saveTopSong(models: List<TrackModel>): Flowable<Void> {
+        return musicDiskDataSource.insertTopSong( dataMapper.convert(models)).map { null }
+    }
+
+    override fun getTopSongs(): Flowable<List<TrackModel>> {
+        return musicDiskDataSource.selectTopSongs().map { entities -> dataMapper.convertToModels(entities) }
+    }
+
+    override fun fetchLyrics(trackName: String, artistName: String, trackId: Int): Flowable<LyricsModel> {
+        return musicCloudDataSource.getSongLyrics(trackName, artistName).map { response ->
+            if(!response.isSuccessful){
+                throw Exception("Something went wrong!")
+            }
+
+            if( !response.body().message.header.isSuccessful()){
+                throw Exception("there was an error in the API")
+            }
+
+            dataMapper.convert(trackId, response.body().message.body)
+        }
+    }
+
+    override fun saveLyrics(model: LyricsModel): Flowable<Int> {
+        return musicDiskDataSource.insertLyrics(dataMapper.convert(model))
+    }
+
+    override fun getLyrics(lyricsId: Int): Flowable<LyricsModel> {
+        return musicDiskDataSource.selectLyrics(lyricsId).map { entity -> dataMapper.convert(entity) }
+    }
+
+    override fun getSong(trackId: Int): Flowable<TrackModel> {
+        return musicDiskDataSource.selectSong(trackId).map { entity -> dataMapper.convert(entity)}
+    }
 }

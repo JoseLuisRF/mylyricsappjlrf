@@ -4,9 +4,11 @@ import android.content.Context;
 
 import com.example.joseramos.lyricsappjlrf.MyLyricsApplication;
 import com.example.joseramos.lyricsappjlrf.UIThread;
+import com.example.joseramos.lyricsappjlrf.data.database.AppDataBase;
 import com.example.joseramos.lyricsappjlrf.data.executor.JobExecutor;
 import com.example.joseramos.lyricsappjlrf.domain.executor.PostExecutionThread;
 import com.example.joseramos.lyricsappjlrf.domain.executor.ThreadExecutor;
+import com.example.joseramos.lyricsappjlrf.presentation.utils.DeviceUtils;
 
 import javax.inject.Singleton;
 
@@ -38,5 +40,17 @@ public class ApplicationModule {
     @Singleton
     PostExecutionThread providePostExecutionThread(UIThread uiThread) {
         return uiThread;
+    }
+
+    @Provides
+    @Singleton
+    DeviceUtils providesDeviceUtils() {
+        return new DeviceUtils(application);
+    }
+
+    @Provides
+    @Singleton
+    AppDataBase providesAppDataBase() {
+        return AppDataBase.createDatabase(application);
     }
 }

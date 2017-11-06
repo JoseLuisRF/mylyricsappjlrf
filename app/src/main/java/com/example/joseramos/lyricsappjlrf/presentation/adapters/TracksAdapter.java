@@ -22,6 +22,12 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.TrackViewH
         this.data = tracks;
     }
 
+    private TracksAdapterListener listener;
+
+    public interface TracksAdapterListener<T> {
+        void onItemClick(View view, int position,  T item);
+    }
+
     @Override
     public TrackViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemAlbumTrackBinding binding = DataBindingUtil.inflate(
@@ -34,14 +40,24 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.TrackViewH
     }
 
     @Override
-    public void onBindViewHolder(TrackViewHolder holder, int position) {
-        TrackModel trackModel = data.get(position);
+    public void onBindViewHolder(TrackViewHolder holder, final int position) {
+        final TrackModel trackModel = data.get(position);
         holder.binding.setModel(trackModel);
+        holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onItemClick(view, position, trackModel);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void setTrackAdapterListener(TracksAdapterListener listener) {
+        this.listener = listener;
     }
 
     public static class TrackViewHolder extends RecyclerView.ViewHolder {

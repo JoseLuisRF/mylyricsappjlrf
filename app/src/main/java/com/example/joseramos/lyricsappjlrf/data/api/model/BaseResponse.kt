@@ -20,4 +20,9 @@ data class Header(
         val statusCode: Int,
         @SerializedName("execute_time")
         val executionTime: Float
-)
+) {
+    fun isSuccessful(): Boolean {
+        return statusCode == 200
+    }
+
+}
