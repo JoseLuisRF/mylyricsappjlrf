@@ -3,6 +3,7 @@ package com.example.joseramos.lyricsappjlrf.presentation.fragments
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,5 +70,6 @@ class LyricsFragment : LyricsView,  OnBackPressListener , BaseFragment() {
 
     override fun onLoadLyricsSuccessful(model: LyricsModel) {
         binding?.model = model
+        Log.d("JLRF", model.lyricsBody)
     }
 }

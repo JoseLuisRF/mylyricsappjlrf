@@ -2,6 +2,10 @@ package com.example.joseramos.lyricsappjlrf.data.api.model
 
 import com.google.gson.annotations.SerializedName
 
+data class LyricsWrapperResponse constructor(
+        @SerializedName("lyrics")
+        val lyrics: LyricsResponse)
+
 data class LyricsResponse constructor(
         @SerializedName("lyrics_id")
         val lyricsId: Int,

@@ -48,7 +48,7 @@ class MusicRepositoryImpl @Inject constructor(val musicCloudDataSource: MusicClo
                 throw Exception("there was an error in the API")
             }
 
-            dataMapper.convert(trackId, response.body().message.body)
+            dataMapper.convert(trackId, response.body().message.body.lyrics)
         }
     }
 

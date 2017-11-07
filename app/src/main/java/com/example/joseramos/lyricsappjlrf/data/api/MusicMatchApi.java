@@ -2,10 +2,9 @@ package com.example.joseramos.lyricsappjlrf.data.api;
 
 import com.example.joseramos.lyricsappjlrf.data.api.model.BaseResponse;
 import com.example.joseramos.lyricsappjlrf.data.api.model.GetTopSongsResponse;
-import com.example.joseramos.lyricsappjlrf.data.api.model.LyricsResponse;
+import com.example.joseramos.lyricsappjlrf.data.api.model.LyricsWrapperResponse;
 
 import io.reactivex.Flowable;
-
 import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -20,6 +19,6 @@ public interface MusicMatchApi {
 
 
     @GET("matcher.lyrics.get")
-    Flowable<Response<BaseResponse<LyricsResponse>>> getLyrics(@Query("q_track") String trackName,
-                                                               @Query("q_artist") String artistName);
+    Flowable<Response<BaseResponse<LyricsWrapperResponse>>> getLyrics(@Query("q_track") String trackName,
+                                                                      @Query("q_artist") String artistName);
 }
