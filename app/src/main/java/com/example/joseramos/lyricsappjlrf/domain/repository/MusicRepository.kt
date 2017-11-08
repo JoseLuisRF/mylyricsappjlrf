@@ -17,7 +17,8 @@ interface MusicRepository {
 
     fun saveLyrics(model: LyricsModel): Flowable<Int>
 
-    fun getLyrics(lyricsId: Int): Flowable<LyricsModel>
+    fun getLyrics(trackId: Int): Flowable<LyricsModel>
 
     fun getSong(trackId: Int): Flowable<TrackModel>
+
 }

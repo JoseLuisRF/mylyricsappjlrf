@@ -9,6 +9,7 @@ import com.example.joseramos.lyricsappjlrf.data.executor.JobExecutor;
 import com.example.joseramos.lyricsappjlrf.domain.executor.PostExecutionThread;
 import com.example.joseramos.lyricsappjlrf.domain.executor.ThreadExecutor;
 import com.example.joseramos.lyricsappjlrf.presentation.utils.DeviceUtils;
+import com.example.joseramos.lyricsappjlrf.presentation.utils.PermissionsManager;
 
 import javax.inject.Singleton;
 
@@ -52,5 +53,11 @@ public class ApplicationModule {
     @Singleton
     AppDataBase providesAppDataBase() {
         return AppDataBase.createDatabase(application);
+    }
+
+    @Provides
+    @Singleton
+    PermissionsManager providesPermissionsManager() {
+        return new PermissionsManager(application);
     }
 }

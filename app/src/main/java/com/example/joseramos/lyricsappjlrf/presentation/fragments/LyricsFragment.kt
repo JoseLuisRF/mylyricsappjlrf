@@ -46,7 +46,7 @@ class LyricsFragment : LyricsView,  OnBackPressListener , BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        fragmentComponent.inject(this)
+        fragmentComponent?.inject(this)
         presenter.setView(this)
         if (arguments.getInt(BUNDLE_TRACK_ID, 0) != 0 ){
             presenter.loadLyrics(arguments.getInt(BUNDLE_TRACK_ID))

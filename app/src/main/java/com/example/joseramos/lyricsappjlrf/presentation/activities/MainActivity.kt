@@ -12,6 +12,7 @@ import com.example.joseramos.lyricsappjlrf.presentation.adapters.HOME
 import com.example.joseramos.lyricsappjlrf.presentation.adapters.HomePagerAdapter
 
 class MainActivity : ViewPager.OnPageChangeListener,  BaseActivity() {
+
     var binding: ActivityMainBinding? = null
     var pagerAdapter: HomePagerAdapter? = null
 
@@ -38,11 +39,9 @@ class MainActivity : ViewPager.OnPageChangeListener,  BaseActivity() {
     }
 
     override fun onPageScrollStateChanged(state: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onPageSelected(position: Int) {
@@ -56,6 +55,5 @@ class MainActivity : ViewPager.OnPageChangeListener,  BaseActivity() {
             }
         }
     }
-
 
 }

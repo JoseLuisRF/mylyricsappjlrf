@@ -6,10 +6,21 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
+import android.os.Environment;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 
 import javax.inject.Inject;
+
+import static com.example.joseramos.lyricsappjlrf.data.database.AppDataBaseKt.DATABASE_NAME;
 
 public class DeviceUtils {
 
@@ -68,4 +79,46 @@ public class DeviceUtils {
                 return false;
         }
     }
+
+
+    /**
+     * Exports Data Base
+     */
+    public void exportDataBases() throws IOException {
+        writeToSD(mContext, DATABASE_NAME);
+    }
+
+    /**
+     * Exports the data base file to /sdcard folder with the name mac_technique_test.db
+     * This method only works on Debug Mode
+     *
+     * @param context Application Context
+     * @throws IOException
+     */
+    private void writeToSD(Context context, String databaseName) throws IOException {
+        String DB_PATH;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            DB_PATH = context.getFilesDir().getAbsolutePath().replace("files", "databases") + File.separator;
+        } else {
+            DB_PATH = context.getFilesDir().getPath() + context.getPackageName() + "/databases/";
+        }
+        File sd = Environment.getExternalStorageDirectory();
+
+        if (sd.canWrite()) {
+            String currentDBPath = databaseName;
+            String backupDBPath = "demo_" + databaseName;
+            File currentDB = new File(DB_PATH, currentDBPath);
+            File backupDB = new File(sd, backupDBPath);
+
+            if (currentDB.exists()) {
+                FileChannel src = new FileInputStream(currentDB).getChannel();
+                FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                dst.transferFrom(src, 0, src.size());
+                src.close();
+                dst.close();
+                Log.d("JLRF", "exported-path:" + backupDB.getPath());
+            }
+        }
+    }
+
 }

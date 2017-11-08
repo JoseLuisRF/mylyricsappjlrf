@@ -3,11 +3,13 @@ package com.example.joseramos.lyricsappjlrf.presentation.presenters
 import com.example.joseramos.lyricsappjlrf.domain.interactor.UseCaseGetLyrics
 import com.example.joseramos.lyricsappjlrf.domain.models.LyricsModel
 import com.example.joseramos.lyricsappjlrf.presentation.presenters.base.BasePresenter
+import com.example.joseramos.lyricsappjlrf.presentation.utils.DeviceUtils
 import com.example.joseramos.lyricsappjlrf.presentation.views.LyricsView
 import io.reactivex.subscribers.DisposableSubscriber
 import javax.inject.Inject
 
-class LyricsPresenter @Inject constructor(private val useCaseGetLyrics: UseCaseGetLyrics) : BasePresenter<LyricsView> {
+class LyricsPresenter @Inject constructor(private val useCaseGetLyrics: UseCaseGetLyrics,
+                                          private val deviceUtils: DeviceUtils) : BasePresenter<LyricsView> {
 
     private var view: LyricsView? = null
 
@@ -18,11 +20,13 @@ class LyricsPresenter @Inject constructor(private val useCaseGetLyrics: UseCaseG
             }
 
             override fun onError(t: Throwable) {
+                t.printStackTrace()
+                deviceUtils.exportDataBases();
 
             }
 
             override fun onComplete() {
-
+                deviceUtils.exportDataBases();
             }
         }, trackId)
     }

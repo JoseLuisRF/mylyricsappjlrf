@@ -33,15 +33,19 @@ class MusicDiskDataSourceImpl @Inject constructor(private val database: AppDataB
 
     override fun insertLyrics(entity: SongLyricsEntity): Flowable<Int> {
         return Flowable.create({e ->
-            database.lyricsDao().insert(entity)
-            e.onNext(entity.lyricsId)
+            val res = database.lyricsDao().insert(entity)
+            if( res > 0 ){
+                e.onNext(entity.lyricsId)
+            } else {
+                e.tryOnError(Throwable("There was an error inserting SongLyricsEntity"))
+            }
             e.onComplete()
         }, BackpressureStrategy.BUFFER)
     }
 
-    override fun selectLyrics(lyricsId: Int): Flowable<SongLyricsEntity> {
+    override fun selectLyrics(trackId: Int): Flowable<SongLyricsEntity> {
         return Flowable.create({e ->
-            e.onNext(database.lyricsDao().selectLyrics(lyricsId))
+            e.onNext(database.lyricsDao().selectLyrics(trackId))
             e.onComplete()
         }, BackpressureStrategy.BUFFER)
     }

@@ -56,8 +56,8 @@ class MusicRepositoryImpl @Inject constructor(private val musicCloudDataSource: 
         return musicDiskDataSource.insertLyrics(dataMapper.convert(model))
     }
 
-    override fun getLyrics(lyricsId: Int): Flowable<LyricsModel> {
-        return musicDiskDataSource.selectLyrics(lyricsId).map { entity -> dataMapper.convert(entity) }
+    override fun getLyrics(trackId: Int): Flowable<LyricsModel> {
+        return musicDiskDataSource.selectLyrics(trackId).map { entity -> dataMapper.convert(entity) }
     }
 
     override fun getSong(trackId: Int): Flowable<TrackModel> {

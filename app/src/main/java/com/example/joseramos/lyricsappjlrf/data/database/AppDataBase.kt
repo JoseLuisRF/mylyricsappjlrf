@@ -10,6 +10,9 @@ import com.example.joseramos.lyricsappjlrf.data.database.dao.TopSongsDao
 import com.example.joseramos.lyricsappjlrf.data.database.entity.SongLyricsEntity
 import com.example.joseramos.lyricsappjlrf.data.database.entity.TopSongsEntity
 
+
+const val DATABASE_NAME = "my_lyrics_app.db"
+
 @Database(entities = arrayOf(
         TopSongsEntity::class,
         SongLyricsEntity::class),
@@ -24,7 +27,9 @@ abstract class AppDataBase : RoomDatabase() {
         @JvmStatic
         fun createDatabase(context: Context): AppDataBase? {
             if (INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(context, AppDataBase::class.java, "my_lyrics_app.db").build()
+                INSTANCE = Room.databaseBuilder(context, AppDataBase::class.java, DATABASE_NAME)
+                        .allowMainThreadQueries()
+                        .build()
             }
             return INSTANCE
         }

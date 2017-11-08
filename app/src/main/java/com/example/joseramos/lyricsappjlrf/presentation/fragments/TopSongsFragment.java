@@ -77,7 +77,7 @@ public class TopSongsFragment extends BaseFragment implements TopSongsView {
     private TracksAdapter.TracksAdapterListener<TrackModel> trackModelTracksAdapterListener = new TracksAdapter.TracksAdapterListener<TrackModel>() {
         @Override
         public void onItemClick(View view, int position, TrackModel item) {
-            navigator.navigateToSecondLevelActivity(item.getTrackId());
+            getNavigator().navigateToSecondLevelActivity(item.getTrackId());
         }
     };
 }
