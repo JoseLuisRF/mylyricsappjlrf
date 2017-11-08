@@ -3,44 +3,59 @@ package com.example.joseramos.lyricsappjlrf.presentation.activities
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.view.ViewPager
 import com.example.joseramos.lyricsappjlrf.R
 import com.example.joseramos.lyricsappjlrf.databinding.ActivityMainBinding
 import com.example.joseramos.lyricsappjlrf.presentation.activities.base.BaseActivity
+import com.example.joseramos.lyricsappjlrf.presentation.adapters.ABOUT
 import com.example.joseramos.lyricsappjlrf.presentation.adapters.HOME
 import com.example.joseramos.lyricsappjlrf.presentation.adapters.HomePagerAdapter
-import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity() {
-
+class MainActivity : ViewPager.OnPageChangeListener,  BaseActivity() {
     var binding: ActivityMainBinding? = null
     var pagerAdapter: HomePagerAdapter? = null
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-
-                return@OnNavigationItemSelectedListener true
+                binding?.pager?.currentItem = HOME
             }
-            R.id.navigation_dashboard -> {
-
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_notifications -> {
-
-                return@OnNavigationItemSelectedListener true
+            R.id.navigation_about -> {
+                binding?.pager?.currentItem = ABOUT
             }
         }
-        false
+        true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        pagerAdapter = HomePagerAdapter(supportFragmentManager)
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        pagerAdapter = HomePagerAdapter(supportFragmentManager)
+        binding?.navigation?.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         binding?.pager?.adapter = pagerAdapter
         binding?.pager?.currentItem = HOME
+        binding?.pager?.addOnPageChangeListener(this)
     }
+
+    override fun onPageScrollStateChanged(state: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onPageSelected(position: Int) {
+
+        when(position){
+            HOME -> {
+                binding?.navigation?.selectedItemId = R.id.navigation_home
+            }
+            ABOUT -> {
+                binding?.navigation?.selectedItemId = R.id.navigation_about
+            }
+        }
+    }
+
 
 }
