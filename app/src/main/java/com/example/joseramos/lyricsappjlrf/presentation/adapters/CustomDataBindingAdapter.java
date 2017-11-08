@@ -2,7 +2,6 @@ package com.example.joseramos.lyricsappjlrf.presentation.adapters;
 
 
 import android.databinding.BindingAdapter;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.widget.ImageView;
 

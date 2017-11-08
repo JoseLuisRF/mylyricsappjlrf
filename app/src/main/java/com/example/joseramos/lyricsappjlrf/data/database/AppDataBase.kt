@@ -20,18 +20,11 @@ abstract class AppDataBase : RoomDatabase() {
     abstract fun lyricsDao() : LyricsDao
 
     companion object {
-
         private var INSTANCE: AppDataBase? = null
-
         @JvmStatic
         fun createDatabase(context: Context): AppDataBase? {
-
             if (INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(
-                        context,
-                        AppDataBase::class.java,
-                        "my_lyrics_app.db")
-                        .build()
+                INSTANCE = Room.databaseBuilder(context, AppDataBase::class.java, "my_lyrics_app.db").build()
             }
             return INSTANCE
         }
