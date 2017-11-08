@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class UseCaseGetLyrics @Inject constructor(threadExecutor: ThreadExecutor,
                                            postExecutionThread: PostExecutionThread,
-                                           val musicRepository: MusicRepository) : BaseUseCaseFlowable<LyricsModel, Int>(threadExecutor, postExecutionThread) {
+                                           private val musicRepository: MusicRepository) : BaseUseCaseFlowable<LyricsModel, Int>(threadExecutor, postExecutionThread) {
 
     override fun buildUseCaseObservable(trackId: Int): Flowable<LyricsModel> {
         return musicRepository.getSong(trackId)

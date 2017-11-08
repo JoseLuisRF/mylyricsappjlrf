@@ -13,8 +13,8 @@ import javax.inject.Inject
 class UseCaseGetTopSongs @Inject
 constructor(threadExecutor: ThreadExecutor,
             postExecutionThread: PostExecutionThread,
-            val musicRepository: MusicRepository,
-            val deviceUtils: DeviceUtils) : BaseUseCaseFlowable<List<TrackModel>, Void>(threadExecutor, postExecutionThread) {
+            private val musicRepository: MusicRepository,
+            private val deviceUtils: DeviceUtils) : BaseUseCaseFlowable<List<TrackModel>, Void>(threadExecutor, postExecutionThread) {
 
     override fun buildUseCaseObservable(`object`: Void?): Flowable<List<TrackModel>> {
         if (deviceUtils.isNetworkAvailable) {

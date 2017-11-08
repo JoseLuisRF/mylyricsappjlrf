@@ -7,7 +7,7 @@ import com.example.joseramos.lyricsappjlrf.presentation.views.LyricsView
 import io.reactivex.subscribers.DisposableSubscriber
 import javax.inject.Inject
 
-class LyricsPresenter @Inject constructor(val useCaseGetLyrics: UseCaseGetLyrics) : BasePresenter<LyricsView> {
+class LyricsPresenter @Inject constructor(private val useCaseGetLyrics: UseCaseGetLyrics) : BasePresenter<LyricsView> {
 
     private var view: LyricsView? = null
 

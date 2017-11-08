@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class UseCaseSaveTopSongs @Inject constructor(threadExecutor: ThreadExecutor?,
                                               postExecutionThread: PostExecutionThread?,
-                                              val repository: MusicRepository) : BaseUseCaseFlowable<Void, List<TrackModel>>(threadExecutor, postExecutionThread) {
+                                              private val repository: MusicRepository) : BaseUseCaseFlowable<Void, List<TrackModel>>(threadExecutor, postExecutionThread) {
 
     override fun buildUseCaseObservable(models: List<TrackModel>): Flowable<Void> {
         return repository.saveTopSong(models)

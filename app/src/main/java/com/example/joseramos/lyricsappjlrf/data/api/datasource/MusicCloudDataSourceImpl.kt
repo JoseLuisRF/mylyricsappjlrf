@@ -11,7 +11,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 
-class MusicCloudDataSourceImpl @Inject constructor(val api: MusicMatchApi) : MusicCloudDataSource {
+class MusicCloudDataSourceImpl @Inject constructor(private val api: MusicMatchApi) : MusicCloudDataSource {
 
     override fun getTopSongs(country: String): Flowable<Response<BaseResponse<GetTopSongsResponse>>> {
         return api.getTopSongs(1, 5, "mx", 1)

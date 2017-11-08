@@ -10,9 +10,9 @@ import io.reactivex.Flowable
 import java.lang.Exception
 import javax.inject.Inject
 
-class MusicRepositoryImpl @Inject constructor(val musicCloudDataSource: MusicCloudDataSource,
-                                              val musicDiskDataSource: MusicDiskDataSource,
-                                              val dataMapper: MusicDataMapper) : MusicRepository {
+class MusicRepositoryImpl @Inject constructor(private val musicCloudDataSource: MusicCloudDataSource,
+                                              private val musicDiskDataSource: MusicDiskDataSource,
+                                              private val dataMapper: MusicDataMapper) : MusicRepository {
 
     override fun fetchTopSongs(): Flowable<List<TrackModel>> {
         return musicCloudDataSource.getTopSongs("mx")
