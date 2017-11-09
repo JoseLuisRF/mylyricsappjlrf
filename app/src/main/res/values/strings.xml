@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LyricsAppJLRF</string>
+    <string name="title_home">Home</string>
+    <string name="get_top_songs">Get top songs</string>
+    <string name="about">About</string>
+    <string name="top_songs">Top Songs</string>
+</resources>
