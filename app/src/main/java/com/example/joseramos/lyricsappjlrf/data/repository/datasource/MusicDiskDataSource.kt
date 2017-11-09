@@ -14,7 +14,7 @@ interface MusicDiskDataSource {
 
     fun insertLyrics(entity: SongLyricsEntity): Flowable<Int>
 
-    fun selectLyrics(lyricsId: Int): Flowable<SongLyricsEntity>
+    fun selectLyrics(trackId: Int): Flowable<SongLyricsEntity>
 
     fun selectSong(trackId: Int): Flowable<TopSongsEntity>
 }
