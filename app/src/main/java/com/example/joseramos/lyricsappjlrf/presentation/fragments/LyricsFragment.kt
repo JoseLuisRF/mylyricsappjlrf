@@ -53,7 +53,7 @@ class LyricsFragment : LyricsView,  OnBackPressListener , BaseFragment() {
         }
     }
     override fun onBackPressed() {
-        navigator.navigateToMainActivity()
+        activity.finish()
     }
 
     override fun showLoading() {

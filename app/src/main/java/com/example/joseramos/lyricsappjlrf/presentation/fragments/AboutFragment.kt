@@ -10,21 +10,23 @@ import com.example.joseramos.lyricsappjlrf.R
 import com.example.joseramos.lyricsappjlrf.databinding.FragmentAboutBinding
 import com.example.joseramos.lyricsappjlrf.presentation.adapters.CustomDataBindingAdapter
 import com.example.joseramos.lyricsappjlrf.presentation.fragments.base.BaseFragment
+import com.example.joseramos.lyricsappjlrf.presentation.navigation.OnBackPressListener
 
 
-class AboutFragment : BaseFragment() {
+class AboutFragment : BaseFragment(), OnBackPressListener {
 
     lateinit var binding: FragmentAboutBinding
+
     companion object {
 
         @JvmStatic
-        fun newInstance() : Fragment {
+        fun newInstance(): Fragment {
             return AboutFragment()
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate<FragmentAboutBinding>(inflater, R.layout.fragment_about,container, false );
+        binding = DataBindingUtil.inflate<FragmentAboutBinding>(inflater, R.layout.fragment_about, container, false);
         return binding.root
     }
 
@@ -33,5 +35,7 @@ class AboutFragment : BaseFragment() {
         CustomDataBindingAdapter.loadImage(binding.ivCustomerProfilePicture, "https://pbs.twimg.com/profile_images/807295527888953344/BDp2mZDB_400x400.jpg");
     }
 
-
+    override fun onBackPressed() {
+        activity.finish()
+    }
 }

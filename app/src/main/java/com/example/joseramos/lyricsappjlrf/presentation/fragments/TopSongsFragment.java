@@ -15,6 +15,7 @@ import com.example.joseramos.lyricsappjlrf.databinding.FragmentTopSongsBinding;
 import com.example.joseramos.lyricsappjlrf.domain.models.TrackModel;
 import com.example.joseramos.lyricsappjlrf.presentation.adapters.TracksAdapter;
 import com.example.joseramos.lyricsappjlrf.presentation.fragments.base.BaseFragment;
+import com.example.joseramos.lyricsappjlrf.presentation.navigation.OnBackPressListener;
 import com.example.joseramos.lyricsappjlrf.presentation.presenters.TopSongsPresenter;
 import com.example.joseramos.lyricsappjlrf.presentation.views.TopSongsView;
 
@@ -22,7 +23,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class TopSongsFragment extends BaseFragment implements TopSongsView {
+public class TopSongsFragment extends BaseFragment implements TopSongsView, OnBackPressListener {
 
     public static TopSongsFragment newInstance() {
         return new TopSongsFragment();
@@ -80,4 +81,9 @@ public class TopSongsFragment extends BaseFragment implements TopSongsView {
             getNavigator().navigateToSecondLevelActivity(item.getTrackId());
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        getActivity().finish();
+    }
 }

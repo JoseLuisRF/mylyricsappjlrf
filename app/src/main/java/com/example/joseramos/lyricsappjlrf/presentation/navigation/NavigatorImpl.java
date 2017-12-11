@@ -25,6 +25,7 @@ public class NavigatorImpl implements Navigator {
 
     @Override
     public void navigateToMainActivity() {
+        mNavigatorManager.clearBackStack();
         Intent intent = new Intent(mContext, MainActivity.class);
         mContext.startActivity(intent);
     }
