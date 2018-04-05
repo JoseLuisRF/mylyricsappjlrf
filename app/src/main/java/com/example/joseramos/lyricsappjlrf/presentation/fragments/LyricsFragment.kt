@@ -39,7 +39,7 @@ class LyricsFragment : LyricsView,  OnBackPressListener , BaseFragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate<FragmentLyricsScreenBinding>(inflater, R.layout.fragment_lyrics_screen, container, false)
+        binding = DataBindingUtil.inflate<FragmentLyricsScreenBinding>(inflater!!, R.layout.fragment_lyrics_screen, container, false)
         return binding?.root
     }
 

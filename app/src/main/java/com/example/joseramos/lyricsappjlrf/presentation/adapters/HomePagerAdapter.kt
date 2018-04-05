@@ -14,9 +14,9 @@ const val COUNT = 2
 class HomePagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment? {
-        when (position) {
-            HOME -> return TopSongsFragment.newInstance()
-            else -> {return AboutFragment.newInstance()}
+        return when (position) {
+            HOME -> TopSongsFragment.newInstance()
+            else -> AboutFragment.newInstance()
         }
     }
 
@@ -25,9 +25,9 @@ class HomePagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     }
 
     override fun getPageTitle(position: Int): CharSequence {
-        when (position) {
-            HOME -> return "Home"
-            else -> {return "About"}
+       return when (position) {
+            HOME -> "Home"
+            else -> "About"
         }
     }
 }

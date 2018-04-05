@@ -26,7 +26,7 @@ class AboutFragment : BaseFragment(), OnBackPressListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate<FragmentAboutBinding>(inflater, R.layout.fragment_about, container, false);
+        binding = DataBindingUtil.inflate<FragmentAboutBinding>(inflater!!, R.layout.fragment_about, container, false);
         return binding.root
     }
 

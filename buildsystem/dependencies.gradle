@@ -16,6 +16,26 @@ ext {
     testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
     testApplicationId = 'com.example.joseramos.lyricsappjlrf'
 
+
+    //Package
+    supportLibsPackage = "com.android.support"
+    playServicesPackage = "com.google.android.gms"
+    rxPackage = "io.reactivex.rxjava2"
+    mockitoPackage = "org.mockito"
+    archRoomPackage = "android.arch.persistence.room"
+    dagger2Package = "com.google.dagger"
+    retrofitPackage = "com.squareup.retrofit2"
+    okHttpPackage = "com.squareup.okhttp3"
+    picassoPackage = "com.squareup.picasso"
+    AndroidDataBindingPackage = "com.android.databinding"
+    gsonPackage = ""
+
+    //Dependency
+    mockitoDependency = "mockito-inline" //old mockito mockito-core
+
+
+
+    //Version
     supportLibsVersion          = "26.1.0"
     constraintLayoutVersion     = "1.0.2"
     multiDexVersion             = "1.0.1"
@@ -30,7 +50,7 @@ ext {
     rxAndroidVersion            = "2.0.1"
     jodaTimeVersion             = "2.9.9"
     jUnitVersion                = "4.12"
-    mockitoVersion              = "2.10.0"
+    mockitoVersion              = "2.17.0"
     mockitokotlinVersion        = "1.5.0"
     kotlinVersion               = "1.1.51"
     espressoCoreVersion         = "2.2.2"
@@ -44,8 +64,6 @@ ext {
             CardViewV7              : "com.android.support:cardview-v7:${supportLibsVersion}",
             CustomTabs              : "com.android.support:customtabs:${supportLibsVersion}",
             SupportDesign           : "com.android.support:design:${supportLibsVersion}",
-            ArchRoomRuntime         : "android.arch.persistence.room:runtime:${archRoomVersion}",
-            ArchRoomRxJava2         : "android.arch.persistence.room:rxjava2:${archRoomVersion}",
             PlayServicesMaps        : "com.google.android.gms:play-services-maps:${playServicesVersion}",
             PlayServicesLocation    : "com.google.android.gms:play-services-location:${playServicesVersion}",
             GcmPlayServices         : "com.google.android.gms:play-services-gcm:${playServicesVersion}",
@@ -61,16 +79,22 @@ ext {
             RxJava2                 : "io.reactivex.rxjava2:rxjava:${rxjava2Version}",
             RxAndroid               : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             RoomCompiler            : "android.arch.persistence.room:compiler:${archRoomVersion}",
+            ArchRoomRuntime         : "android.arch.persistence.room:runtime:${archRoomVersion}",
+            ArchRoomRxJava2         : "android.arch.persistence.room:rxjava2:${archRoomVersion}",
             KotlinStdLib            : "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
             AndroidDatabinding      : "com.android.databinding:compiler:${AndroidDataBindingVersion}"
     ]
 
     testDependencies = [
             JUnit                   : "junit:junit:${jUnitVersion}",
-            Mockito                 : "org.mockito:mockito-core:${mockitoVersion}",
+            Mockito                 : buildDependency(mockitoPackage,mockitoDependency,mockitoVersion),
             MockitoKotlin           : "com.nhaarman:mockito-kotlin:${mockitokotlinVersion}",
             KotlinReflect           : "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}",
             EspressoCore            : "com.android.support.test.espresso:espresso-core:${espressoCoreVersion}"
     ]
 
+}
+
+String buildDependency (String pack, String dependency, String version) {
+    return "${pack}:${dependency}:${version}"
 }

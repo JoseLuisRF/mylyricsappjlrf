@@ -8,7 +8,7 @@ import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import javax.inject.Inject
 
-class MusicDiskDataSourceImpl @Inject constructor(private val database: AppDataBase) : MusicDiskDataSource {
+class   MusicDiskDataSourceImpl @Inject constructor(private val database: AppDataBase) : MusicDiskDataSource {
 
     override fun insertTopSong(entity: TopSongsEntity): Flowable<Long> {
         return Flowable.create({ e ->

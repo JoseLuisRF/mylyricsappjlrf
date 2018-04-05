@@ -7,7 +7,6 @@ android {
 
     def globalConfiguration = rootProject.extensions.getByName("ext")
     compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
-    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
 
 //    sourceSets {
 //        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
@@ -58,6 +57,7 @@ android {
             dirs 'libs'
         }
     }
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
@@ -87,10 +87,12 @@ dependencies {
 
     kapt dependencies.RoomCompiler
     kapt dependencies.Dagger2Compiler
-    kapt dependencies.AndroidDatabinding
+    //kapt dependencies.AndroidDatabinding
 
     testImplementation testDependencies.JUnit
-    testImplementation testDependencies.MockitoKotlin
+//    testImplementation testDependencies.Mockito
+    testImplementation "org.mockito:mockito-core:2.8.47"
+//    testImplementation "org.mockito:mockito-inline:2.17.0"
 
     androidTestImplementation(testDependencies.EspressoCore, {
         exclude group: 'com.android.support', module: 'support-annotations'
