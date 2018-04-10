@@ -13,8 +13,8 @@ import javax.inject.Inject
 
 class MusicCloudDataSourceImpl @Inject constructor(private val api: MusicMatchApi) : MusicCloudDataSource {
 
-    override fun getTopSongs(country: String): Flowable<Response<BaseResponse<GetTopSongsResponse>>> {
-        return api.getTopSongs(1, 5, "mx", 1)
+    override fun getTopSongs(page:Int,pageSize:Int,country: String,hasLyrics:Int): Flowable<Response<BaseResponse<GetTopSongsResponse>>> {
+        return api.getTopSongs(page, pageSize, country, hasLyrics)
     }
 
     override fun getSongLyrics(trackName: String, artistName: String): Flowable<Response<BaseResponse<LyricsWrapperResponse>>> {

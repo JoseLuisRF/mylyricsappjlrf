@@ -84,14 +84,15 @@ dependencies {
     implementation dependencies.RxJava2
     implementation dependencies.RxAndroid
     implementation dependencies.KotlinStdLib
+    implementation dependencies.LiveData
 
     kapt dependencies.RoomCompiler
     kapt dependencies.Dagger2Compiler
     //kapt dependencies.AndroidDatabinding
 
     testImplementation testDependencies.JUnit
-//    testImplementation testDependencies.Mockito
-    testImplementation "org.mockito:mockito-core:2.8.47"
+    testImplementation testDependencies.Mockito
+    testImplementation testDependencies.TestLiveData
 //    testImplementation "org.mockito:mockito-inline:2.17.0"
 
     androidTestImplementation(testDependencies.EspressoCore, {

@@ -9,7 +9,7 @@ import retrofit2.Response
 
 interface MusicCloudDataSource {
 
-    fun getTopSongs(country: String): Flowable<Response<BaseResponse<GetTopSongsResponse>>>
+    fun getTopSongs(page:Int, pageSize: Int, country: String,hasLyrics:Int): Flowable<Response<BaseResponse<GetTopSongsResponse>>>
 
 
     fun getSongLyrics(trackName: String, artistName: String): Flowable<Response<BaseResponse<LyricsWrapperResponse>>>

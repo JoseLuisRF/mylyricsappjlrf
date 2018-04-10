@@ -15,7 +15,8 @@ class MusicRepositoryImpl @Inject constructor(private val musicCloudDataSource: 
                                               private val dataMapper: MusicDataMapper) : MusicRepository {
 
     override fun fetchTopSongs(): Flowable<List<TrackModel>> {
-        return musicCloudDataSource.getTopSongs("mx")
+        return musicCloudDataSource
+                .getTopSongs(1,5,"mx",1)
                 .map { response ->
                     if (!response.isSuccessful) {
                         throw  Exception("Error while calling the API ")

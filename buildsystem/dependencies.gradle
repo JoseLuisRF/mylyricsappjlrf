@@ -29,6 +29,7 @@ ext {
     picassoPackage = "com.squareup.picasso"
     AndroidDataBindingPackage = "com.android.databinding"
     gsonPackage = ""
+    archLifeCyclePackage = "android.arch.lifecycle"
 
     //Dependency
     mockitoDependency = "mockito-inline" //old mockito mockito-core
@@ -50,11 +51,12 @@ ext {
     rxAndroidVersion            = "2.0.1"
     jodaTimeVersion             = "2.9.9"
     jUnitVersion                = "4.12"
-    mockitoVersion              = "2.17.0"
+    mockitoVersion              = "2.8.47"
     mockitokotlinVersion        = "1.5.0"
     kotlinVersion               = "1.1.51"
     espressoCoreVersion         = "2.2.2"
     AndroidDataBindingVersion   = "3.0.0"
+    liveDataVersion             = "1.1.1"
 
     dependencies = [
             ConstraintLayout        : "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
@@ -82,7 +84,8 @@ ext {
             ArchRoomRuntime         : "android.arch.persistence.room:runtime:${archRoomVersion}",
             ArchRoomRxJava2         : "android.arch.persistence.room:rxjava2:${archRoomVersion}",
             KotlinStdLib            : "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
-            AndroidDatabinding      : "com.android.databinding:compiler:${AndroidDataBindingVersion}"
+            AndroidDatabinding      : "com.android.databinding:compiler:${AndroidDataBindingVersion}",
+            LiveData                : buildDependency(archLifeCyclePackage,"livedata",liveDataVersion)
     ]
 
     testDependencies = [
@@ -90,7 +93,8 @@ ext {
             Mockito                 : buildDependency(mockitoPackage,mockitoDependency,mockitoVersion),
             MockitoKotlin           : "com.nhaarman:mockito-kotlin:${mockitokotlinVersion}",
             KotlinReflect           : "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}",
-            EspressoCore            : "com.android.support.test.espresso:espresso-core:${espressoCoreVersion}"
+            EspressoCore            : "com.android.support.test.espresso:espresso-core:${espressoCoreVersion}",
+            TestLiveData            : buildDependency("android.arch.core","core-testing",liveDataVersion)
     ]
 
 }
