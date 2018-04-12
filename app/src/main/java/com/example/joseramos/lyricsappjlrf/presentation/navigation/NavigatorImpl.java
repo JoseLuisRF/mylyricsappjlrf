@@ -8,6 +8,8 @@ import com.example.joseramos.lyricsappjlrf.presentation.activities.MainActivity;
 import com.example.joseramos.lyricsappjlrf.presentation.activities.SecondLevelActivity;
 import com.example.joseramos.lyricsappjlrf.presentation.fragments.LyricsFragment;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.inject.Inject;
 
 import static com.example.joseramos.lyricsappjlrf.presentation.fragments.LyricsFragmentKt.BUNDLE_TRACK_ID;
@@ -44,5 +46,11 @@ public class NavigatorImpl implements Navigator {
             fragment = LyricsFragment.newInstance(trackId);
         }
         mNavigatorManager.navigateWithStack(fragment);
+    }
+
+    @NotNull
+    @Override
+    public NavigatorManager getNavigatorManager() {
+        return mNavigatorManager;
     }
 }

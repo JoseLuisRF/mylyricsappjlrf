@@ -10,8 +10,9 @@ import com.example.joseramos.lyricsappjlrf.presentation.activities.base.BaseActi
 import com.example.joseramos.lyricsappjlrf.presentation.adapters.ABOUT
 import com.example.joseramos.lyricsappjlrf.presentation.adapters.HOME
 import com.example.joseramos.lyricsappjlrf.presentation.adapters.HomePagerAdapter
+import dagger.android.AndroidInjection
 
-class MainActivity : ViewPager.OnPageChangeListener,  BaseActivity() {
+class MainActivity : ViewPager.OnPageChangeListener, BaseActivity() {
 
     var binding: ActivityMainBinding? = null
     var pagerAdapter: HomePagerAdapter? = null
@@ -29,6 +30,7 @@ class MainActivity : ViewPager.OnPageChangeListener,  BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         pagerAdapter = HomePagerAdapter(supportFragmentManager)
@@ -46,7 +48,7 @@ class MainActivity : ViewPager.OnPageChangeListener,  BaseActivity() {
 
     override fun onPageSelected(position: Int) {
 
-        when(position){
+        when (position) {
             HOME -> {
                 binding?.navigation?.selectedItemId = R.id.navigation_home
             }
