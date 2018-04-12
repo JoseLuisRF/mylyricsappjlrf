@@ -74,6 +74,8 @@ dependencies {
     implementation dependencies.ArchRoomRxJava2
     implementation dependencies.PlayServicesLocation
     implementation dependencies.Dagger2
+    implementation dependencies.DaggerAndroid
+    implementation dependencies.DaggerAndroidSupport
     implementation dependencies.Gson
     implementation dependencies.Picasso
     implementation dependencies.Retrofit
@@ -84,15 +86,15 @@ dependencies {
     implementation dependencies.RxJava2
     implementation dependencies.RxAndroid
     implementation dependencies.KotlinStdLib
+    implementation dependencies.ArchExtensions
 
     kapt dependencies.RoomCompiler
     kapt dependencies.Dagger2Compiler
-    //kapt dependencies.AndroidDatabinding
+    kapt dependencies.DaggerAndroidProcessor
+    kapt dependencies.AndroidDatabinding
 
     testImplementation testDependencies.JUnit
-//    testImplementation testDependencies.Mockito
-    testImplementation "org.mockito:mockito-core:2.8.47"
-//    testImplementation "org.mockito:mockito-inline:2.17.0"
+    testImplementation testDependencies.Mockito
 
     androidTestImplementation(testDependencies.EspressoCore, {
         exclude group: 'com.android.support', module: 'support-annotations'
