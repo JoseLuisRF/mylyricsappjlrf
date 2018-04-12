@@ -20,18 +20,5 @@ const val DATABASE_NAME = "my_lyrics_app.db"
 abstract class AppDataBase : RoomDatabase() {
 
     abstract fun topSongsDao(): TopSongsDao
-    abstract fun lyricsDao() : LyricsDao
-
-    companion object {
-        private var INSTANCE: AppDataBase? = null
-        @JvmStatic
-        fun createDatabase(context: Context): AppDataBase? {
-            if (INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(context, AppDataBase::class.java, DATABASE_NAME)
-                        .allowMainThreadQueries()
-                        .build()
-            }
-            return INSTANCE
-        }
-    }
+    abstract fun lyricsDao(): LyricsDao
 }

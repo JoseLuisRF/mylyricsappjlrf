@@ -6,6 +6,7 @@ import com.example.joseramos.lyricsappjlrf.data.database.entity.SongLyricsEntity
 import com.example.joseramos.lyricsappjlrf.data.database.entity.TopSongsEntity
 import com.example.joseramos.lyricsappjlrf.domain.models.LyricsModel
 import com.example.joseramos.lyricsappjlrf.domain.models.TrackModel
+import com.example.joseramos.lyricsappjlrf.presentation.models.TrackUIModel
 import javax.inject.Inject
 
 
@@ -23,6 +24,17 @@ class MusicDataMapper @Inject constructor() {
 
     fun convert(model: TrackModel) : TopSongsEntity {
         return TopSongsEntity(
+                model.trackId,
+                model.trackName,
+                model.albumName,
+                model.albumId,
+                model.artistName,
+                model.albumImageUrl,
+                model.favorite)
+    }
+
+    fun convertToUIModel(model: TrackModel) : TrackUIModel {
+        return TrackUIModel(
                 model.trackId,
                 model.trackName,
                 model.albumName,

@@ -10,6 +10,8 @@ interface MusicDiskDataSource {
 
     fun insertTopSong(entity: List<TopSongsEntity>) : Flowable<List<Long>>
 
+    fun insertTopSong2(entity: List<TopSongsEntity>) : List<Long>
+
     fun selectTopSongs() : Flowable<List<TopSongsEntity>>
 
     fun insertLyrics(entity: SongLyricsEntity): Flowable<Int>

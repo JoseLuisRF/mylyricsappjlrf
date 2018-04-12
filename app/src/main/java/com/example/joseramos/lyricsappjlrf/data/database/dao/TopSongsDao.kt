@@ -15,6 +15,10 @@ interface TopSongsDao : BaseDao<TopSongsEntity> {
     @Insert(onConflict = IGNORE)
     fun insertAll(entities: List<TopSongsEntity>): List<Long>
 
+
+    @Insert(onConflict = IGNORE)
+    fun insertAll2(entities: List<TopSongsEntity>): List<Long>
+
     @Query("select * from  $TABLE_NAME_TOP_SONGS ")
     fun selectAll(): List<TopSongsEntity>
 
