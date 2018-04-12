@@ -2,6 +2,8 @@ package com.example.joseramos.lyricsappjlrf;
 
 import com.example.joseramos.lyricsappjlrf.domain.executor.PostExecutionThread;
 
+import java.util.concurrent.Executor;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -23,5 +25,10 @@ public class UIThread implements PostExecutionThread {
     @Override
     public Scheduler getScheduler() {
         return AndroidSchedulers.mainThread();
+    }
+
+    @Override
+    public Executor getMainThreadHandler() {
+        return new MainThreadExecutor();
     }
 }
