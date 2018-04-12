@@ -9,7 +9,7 @@ import com.example.joseramos.lyricsappjlrf.presentation.utils.DeviceUtils
 import io.reactivex.Flowable
 import javax.inject.Inject
 
-
+@Deprecated("Use MusicRepository Instead, since project moved into another architecture.")
 class UseCaseGetTopSongs @Inject
 constructor(threadExecutor: ThreadExecutor,
             postExecutionThread: PostExecutionThread,
@@ -17,9 +17,9 @@ constructor(threadExecutor: ThreadExecutor,
             private val deviceUtils: DeviceUtils) : BaseUseCaseFlowable<List<TrackModel>, Void>(threadExecutor, postExecutionThread) {
 
     override fun buildUseCaseObservable(`object`: Void?): Flowable<List<TrackModel>> {
-        if (deviceUtils.isNetworkAvailable) {
-            return musicRepository.fetchTopSongs()
-        }
+//        if (deviceUtils.isNetworkAvailable) {
+//            return musicRepository.fetchTopSongs()
+//        }
         return musicRepository.getTopSongs();
 
     }
