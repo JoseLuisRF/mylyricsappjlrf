@@ -13,8 +13,7 @@ class StorageModule @Inject constructor() {
 
     @FragmentScope
     @Provides
-    fun providesMusicDiskDataSource (dataBase: AppDataBase) : MusicDiskDataSource {
+    fun providesMusicDiskDataSource(dataBase: AppDataBase): MusicDiskDataSource {
         return MusicDiskDataSourceImpl(dataBase)
     }
-
 }
