@@ -6,13 +6,14 @@ import com.example.joseramos.lyricsappjlrf.data.database.entity.SongLyricsEntity
 import com.example.joseramos.lyricsappjlrf.data.database.entity.TopSongsEntity
 import com.example.joseramos.lyricsappjlrf.domain.models.LyricsModel
 import com.example.joseramos.lyricsappjlrf.domain.models.TrackModel
+import com.example.joseramos.lyricsappjlrf.presentation.models.LyricsUiModel
 import com.example.joseramos.lyricsappjlrf.presentation.models.TrackUIModel
 import javax.inject.Inject
 
 
 class MusicDataMapper @Inject constructor() {
 
-    fun convert(response: TrackResponse) : TrackModel {
+    fun convert(response: TrackResponse): TrackModel {
         return TrackModel(response.trackId,
                 response.trackName,
                 response.albumName,
@@ -22,7 +23,7 @@ class MusicDataMapper @Inject constructor() {
                 0)
     }
 
-    fun convert(model: TrackModel) : TopSongsEntity {
+    fun convert(model: TrackModel): TopSongsEntity {
         return TopSongsEntity(
                 model.trackId,
                 model.trackName,
@@ -33,7 +34,7 @@ class MusicDataMapper @Inject constructor() {
                 model.favorite)
     }
 
-    fun convertToUIModel(model: TrackModel) : TrackUIModel {
+    fun convertToUIModel(model: TrackModel): TrackUIModel {
         return TrackUIModel(
                 model.trackId,
                 model.trackName,
@@ -44,7 +45,7 @@ class MusicDataMapper @Inject constructor() {
                 model.favorite)
     }
 
-    fun convert(entity: TopSongsEntity) : TrackModel {
+    fun convert(entity: TopSongsEntity): TrackModel {
         return TrackModel(
                 entity.trackId,
                 entity.trackName,
@@ -57,7 +58,7 @@ class MusicDataMapper @Inject constructor() {
 
     fun convert(models: List<TrackModel>): List<TopSongsEntity> {
         val entities = mutableListOf<TopSongsEntity>()
-        for(model in models ){
+        for (model in models) {
             entities.add(convert(model))
         }
         return entities
@@ -65,7 +66,7 @@ class MusicDataMapper @Inject constructor() {
 
     fun convertToModels(entities: List<TopSongsEntity>): List<TrackModel>? {
         val models = mutableListOf<TrackModel>()
-        for(entity in entities ){
+        for (entity in entities) {
             models.add(convert(entity))
         }
         return models
@@ -88,7 +89,7 @@ class MusicDataMapper @Inject constructor() {
 
     }
 
-    fun convert( model: LyricsModel): SongLyricsEntity {
+    fun convert(model: LyricsModel): SongLyricsEntity {
         return SongLyricsEntity(
                 model.lyricsId,
                 model.trackId,
@@ -102,6 +103,16 @@ class MusicDataMapper @Inject constructor() {
                 model.lyricsCopyRight,
                 model.updatedTime
         )
+    }
+
+    fun convertTo(model: LyricsModel, errorMessage: String? = null): LyricsUiModel {
+        val response = LyricsUiModel()
+        response.songLyrics = model.lyricsBody
+        if (!errorMessage.isNullOrEmpty()) {
+            response.hasError(errorMessage.toString())
+        }
+
+        return response
     }
 
     fun convert(entity: SongLyricsEntity): LyricsModel {

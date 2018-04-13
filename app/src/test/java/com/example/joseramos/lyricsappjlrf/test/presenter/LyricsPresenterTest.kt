@@ -1,7 +1,5 @@
 package com.example.joseramos.lyricsappjlrf.test.presenter
 
-import com.example.joseramos.lyricsappjlrf.domain.interactor.UseCaseGetLyrics
-import com.example.joseramos.lyricsappjlrf.presentation.presenters.LyricsPresenter
 import com.example.joseramos.lyricsappjlrf.presentation.utils.DeviceUtils
 import com.example.joseramos.lyricsappjlrf.presentation.views.LyricsView
 import org.junit.Before

@@ -22,6 +22,6 @@ public interface MusicMatchApi {
 
 
     @GET("matcher.lyrics.get")
-    Flowable<Response<BaseResponse<LyricsWrapperResponse>>> getLyrics(@Query("q_track") String trackName,
+    Call<BaseResponse<LyricsWrapperResponse>> getLyrics(@Query("q_track") String trackName,
                                                                       @Query("q_artist") String artistName);
 }

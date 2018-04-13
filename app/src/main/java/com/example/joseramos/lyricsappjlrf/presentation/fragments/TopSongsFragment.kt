@@ -38,7 +38,6 @@ class TopSongsFragment : BaseFragment(), TopSongsView, OnBackPressListener {
         //TODO: Implement [AndroidSupportInjection] to avoid injection in the class
 //        AndroidSupportInjection.inject(this)
         super.onAttach(context)
-
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

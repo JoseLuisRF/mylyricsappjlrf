@@ -1,5 +1,6 @@
 package com.example.joseramos.lyricsappjlrf.data.database.dao
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Query
 import com.example.joseramos.lyricsappjlrf.data.database.dao.base.BaseDao
@@ -13,6 +14,9 @@ interface LyricsDao : BaseDao<SongLyricsEntity> {
 
     @Query("select * from $TABLE_NAME_SONG_LYRICS where $COLUMN_TRACK_ID = :trackId")
     fun selectLyrics(trackId: Int): SongLyricsEntity
+
+    @Query("select * from $TABLE_NAME_SONG_LYRICS where $COLUMN_TRACK_ID = :trackId")
+    fun selectLyrics2(trackId: Long): LiveData<SongLyricsEntity>
 
     @Query("select * from $TABLE_NAME_SONG_LYRICS")
     fun selectAll(): List<SongLyricsEntity>

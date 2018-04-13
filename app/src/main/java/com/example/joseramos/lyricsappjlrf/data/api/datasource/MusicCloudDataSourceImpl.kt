@@ -19,7 +19,7 @@ class MusicCloudDataSourceImpl @Inject constructor(private val api: MusicMatchAp
         return api.getTopSongs(1, 5, "mx", 1)
     }
 
-    override fun getSongLyrics(trackName: String, artistName: String): Flowable<Response<BaseResponse<LyricsWrapperResponse>>> {
+    override fun getSongLyrics(trackName: String, artistName: String): Call<BaseResponse<LyricsWrapperResponse>> {
         return api.getLyrics(trackName, artistName)
     }
 }

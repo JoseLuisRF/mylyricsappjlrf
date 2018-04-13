@@ -7,6 +7,7 @@ import android.arch.lifecycle.ViewModel
 import com.example.joseramos.lyricsappjlrf.data.repository.mappers.MusicDataMapper
 
 import com.example.joseramos.lyricsappjlrf.data.repository.response.CallbackResponse
+import com.example.joseramos.lyricsappjlrf.domain.models.TrackModel
 import com.example.joseramos.lyricsappjlrf.domain.repository.MusicRepository
 import com.example.joseramos.lyricsappjlrf.presentation.models.TrackUIModel
 import javax.inject.Inject
@@ -27,6 +28,10 @@ class TopSongsViewModel @Inject constructor(
                 error.printStackTrace()
                 topSongs = MutableLiveData()
 
+            }
+
+            override fun onError(error: LiveData<List<TrackModel>>) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
         })
     }

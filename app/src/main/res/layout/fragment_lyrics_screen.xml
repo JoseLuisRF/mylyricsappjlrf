@@ -7,7 +7,7 @@
     <data>
         <variable
             name="model"
-            type="com.example.joseramos.lyricsappjlrf.domain.models.LyricsModel"/>
+            type="com.example.joseramos.lyricsappjlrf.presentation.models.LyricsUiModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -15,13 +15,33 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_lyrics"
             android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:layout_marginBottom="8dp"
+            android:text="@{model.songLyrics"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_error_message"
+            tools:text="asdsd" />
+
+        <TextView
+            android:id="@+id/tv_error_message"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="asdsd"
-            android:text="@{model.lyricsBody}"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
+
     </android.support.constraint.ConstraintLayout>
 </layout>
