@@ -13,7 +13,7 @@ import com.example.joseramos.lyricsappjlrf.data.database.entity.TABLE_NAME_SONG_
 interface LyricsDao : BaseDao<SongLyricsEntity> {
 
     @Query("select * from $TABLE_NAME_SONG_LYRICS where $COLUMN_TRACK_ID = :trackId")
-    fun selectLyrics(trackId: Int): SongLyricsEntity
+    fun selectLyrics(trackId: Long): SongLyricsEntity
 
     @Query("select * from $TABLE_NAME_SONG_LYRICS where $COLUMN_TRACK_ID = :trackId")
     fun selectLyrics2(trackId: Long): LiveData<SongLyricsEntity>

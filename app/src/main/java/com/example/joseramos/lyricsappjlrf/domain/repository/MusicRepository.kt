@@ -11,12 +11,8 @@ interface MusicRepository {
 
     fun fetchTopSongs(callbackResponse: CallbackResponse<LiveData<List<TrackModel>>>)
 
-    fun saveLyrics(model: LyricsModel): Flowable<Int>
-
-    fun getLyrics(trackId: Int): Flowable<LyricsModel>
-
     fun fetchLyrics2(trackId: Int, callbackResponse: CallbackResponse<LiveData<LyricsModel>>)
 
-//    fun getSong2(trackId: Int): LiveData<TrackModel>
+    fun fetchLyrics(trackId: Int): LiveData<LyricsModel>
 
 }

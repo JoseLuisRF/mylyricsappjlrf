@@ -1,5 +1,6 @@
 package com.example.joseramos.lyricsappjlrf.data.repository.mappers
 
+import android.util.Log
 import com.example.joseramos.lyricsappjlrf.data.api.model.LyricsResponse
 import com.example.joseramos.lyricsappjlrf.data.api.model.TrackResponse
 import com.example.joseramos.lyricsappjlrf.data.database.entity.SongLyricsEntity
@@ -107,11 +108,14 @@ class MusicDataMapper @Inject constructor() {
 
     fun convertTo(model: LyricsModel, errorMessage: String? = null): LyricsUiModel {
         val response = LyricsUiModel()
+
+        Log.d("JLRF", "model.lyricsBody: ${model.lyricsBody}")
+
         response.songLyrics = model.lyricsBody
         if (!errorMessage.isNullOrEmpty()) {
             response.hasError(errorMessage.toString())
         }
-
+        Log.d("JLRF", "response: $response")
         return response
     }
 

@@ -50,14 +50,14 @@ class LyricsFragment : OnBackPressListener, BaseFragment() {
         }
 
         viewModel.getLyrics().observe(this, Observer { lyricsModel ->
-            if (lyricsModel?.error!!) {
+            if (lyricsModel != null && lyricsModel.error) {
                 binding.tvErrorMessage.text = lyricsModel.message
                 binding.tvErrorMessage.visibility = View.VISIBLE
                 binding.tvLyrics.visibility = View.GONE
             } else {
                 binding.tvErrorMessage.visibility = View.GONE
                 binding.tvLyrics.visibility = View.VISIBLE
-                binding.tvLyrics.text = lyricsModel.songLyrics
+                binding.tvLyrics.text = lyricsModel?.songLyrics
             }
         })
     }
