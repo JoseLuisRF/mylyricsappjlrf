@@ -4,4 +4,6 @@
     <string name="get_top_songs">Get top songs</string>
     <string name="about">About</string>
     <string name="top_songs">Top Songs</string>
+    <string name="error_no_internet_connection">No Internet Connection. Please verify you\'re connected to the internet.</string>
+    <string name="error_something_went_wrong">Oops, something went wrong. Please try later.</string>
 </resources>

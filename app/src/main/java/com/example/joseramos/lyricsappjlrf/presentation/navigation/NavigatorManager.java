@@ -44,6 +44,11 @@ public class NavigatorManager {
      * @param fragment Fragment
      */
     public void navigateWithNoStack(Fragment fragment) {
+        if (fragment.isAdded()) {
+            mCurrentFragment = fragment;
+            return;
+        }
+
         if (mCurrentFragment == null) {
             mFragmentManager.beginTransaction()
                     .add(R.id.container, fragment, fragment.getClass().getSimpleName())
@@ -62,17 +67,22 @@ public class NavigatorManager {
      * @param fragment Fragment
      */
     public void navigateWithStack(Fragment fragment) {
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+
+        if (fragment.isAdded()) {
+            mCurrentFragment = fragment;
+            return;
+        }
 
         if (mCurrentFragment == null) {
-            mFragmentManager.beginTransaction()
-                    .add(R.id.container, fragment, fragment.getClass().getSimpleName())
+            transaction.add(R.id.container, fragment, fragment.getClass().getSimpleName())
                     .addToBackStack(fragment.getClass().getSimpleName())
-                    .commit();
+                    .commitAllowingStateLoss();
         } else {
             mFragmentManager.beginTransaction()
                     .replace(R.id.container, fragment, fragment.getClass().getSimpleName())
                     .addToBackStack(fragment.getClass().getSimpleName())
-                    .commitAllowingStateLoss();
+                    .commit();
         }
 
         mCurrentFragment = fragment;
@@ -90,6 +100,9 @@ public class NavigatorManager {
      * @return The current visible Fragment.
      */
     public Fragment getCurrentFragment() {
+        if (mCurrentFragment == null) {
+            mCurrentFragment = mFragmentManager.findFragmentById(R.id.container);
+        }
         return mCurrentFragment;
     }
 
@@ -99,17 +112,5 @@ public class NavigatorManager {
 
     public void popStack() {
         mFragmentManager.popBackStackImmediate();
-        if (hasFragments()) {
-            String fragmentTag = mFragmentManager.getBackStackEntryAt(mFragmentManager.getBackStackEntryCount() - 1).getName();
-            mCurrentFragment = mFragmentManager.findFragmentByTag(fragmentTag);
-        } else {
-            mCurrentFragment = null;
-        }
     }
-
-    private boolean hasFragments() {
-        return mFragmentManager.getBackStackEntryCount() > 0;
-    }
-
-
 }

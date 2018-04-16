@@ -3,6 +3,7 @@ package com.example.joseramos.lyricsappjlrf.data.api.factory;
 import android.util.Log;
 
 import com.example.joseramos.lyricsappjlrf.data.api.interceptors.ApiInterceptor;
+import com.example.joseramos.lyricsappjlrf.presentation.utils.LiveDataCallAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -43,6 +44,7 @@ public class ServiceFactory {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(new LiveDataCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();

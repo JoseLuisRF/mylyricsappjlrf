@@ -15,7 +15,7 @@ class LyricsViewModel @Inject constructor(val musicRepository: MusicRepository, 
     private var songLyrics: LiveData<LyricsUiModel>
 
     init {
-        songLyrics = Transformations.switchMap(trackIdLiveData, {id ->
+        songLyrics = Transformations.switchMap(trackIdLiveData, { id ->
             Transformations.map(musicRepository.fetchLyrics(id), { domainModel ->
                 dataMapper.convertTo(domainModel)
             })

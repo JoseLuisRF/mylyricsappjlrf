@@ -53,10 +53,8 @@ class TopSongsFragment : BaseFragment(), TopSongsView, OnBackPressListener {
         binding.rvTopSongs.layoutManager =  LinearLayoutManager(activity)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(TopSongsViewModel::class.java)
 
-        viewModel.init()
-
-        viewModel.loadTopSongs().observe(this, Observer { topSongs ->
-            adapter = TracksAdapter(topSongs)
+        viewModel.loadTopSongs().observe(this, Observer { response ->
+            adapter = TracksAdapter(response?.topSongs)
             binding.rvTopSongs.adapter = adapter
             adapter!!.setTrackAdapterListener(trackModelTracksAdapterListener)
          })

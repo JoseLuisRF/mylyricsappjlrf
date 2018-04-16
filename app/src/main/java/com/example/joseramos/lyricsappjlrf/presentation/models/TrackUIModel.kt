@@ -7,3 +7,10 @@ data class TrackUIModel constructor(val trackId: Int,
                                     val artistName: String,
                                     val albumImageUrl: String,
                                     val favorite: Int)
+
+
+class LyricsUIViewModel : BaseModel() {
+
+    val topSongs = mutableListOf<TrackUIModel>()
+
+}

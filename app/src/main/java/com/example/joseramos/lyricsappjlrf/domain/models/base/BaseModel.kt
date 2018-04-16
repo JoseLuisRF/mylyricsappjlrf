@@ -7,7 +7,7 @@ open class BaseModel {
     var status: String = "SUCCESS"
 
 
-    fun hasError(message: String) {
+    fun setError(message: String) {
         this.message = message
         this.error = true
         this.status = "ERROR"

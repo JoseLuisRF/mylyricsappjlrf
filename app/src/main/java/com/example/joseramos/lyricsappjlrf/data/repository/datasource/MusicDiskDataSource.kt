@@ -1,5 +1,6 @@
 package com.example.joseramos.lyricsappjlrf.data.repository.datasource
 
+import android.arch.lifecycle.LiveData
 import com.example.joseramos.lyricsappjlrf.data.database.entity.SongLyricsEntity
 import com.example.joseramos.lyricsappjlrf.data.database.entity.TopSongsEntity
 
@@ -10,7 +11,7 @@ interface MusicDiskDataSource {
 
     fun insertLyrics2(entity: SongLyricsEntity): Long
 
-    fun selectLyrics2(trackId: Long): SongLyricsEntity
+    fun selectLyrics2(trackId: Long): LiveData<SongLyricsEntity>
 
-    fun selectSong2(trackId: Int): TopSongsEntity
+    fun selectSong2(trackId: Int): LiveData<TopSongsEntity>
 }

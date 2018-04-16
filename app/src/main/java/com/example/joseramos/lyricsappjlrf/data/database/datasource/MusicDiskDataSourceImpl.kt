@@ -1,12 +1,10 @@
 package com.example.joseramos.lyricsappjlrf.data.database.datasource
 
-import android.util.Log
+import android.arch.lifecycle.LiveData
 import com.example.joseramos.lyricsappjlrf.data.database.AppDataBase
 import com.example.joseramos.lyricsappjlrf.data.database.entity.SongLyricsEntity
 import com.example.joseramos.lyricsappjlrf.data.database.entity.TopSongsEntity
 import com.example.joseramos.lyricsappjlrf.data.repository.datasource.MusicDiskDataSource
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Flowable
 import javax.inject.Inject
 
 class MusicDiskDataSourceImpl @Inject constructor(private val database: AppDataBase) : MusicDiskDataSource {
@@ -20,11 +18,11 @@ class MusicDiskDataSourceImpl @Inject constructor(private val database: AppDataB
     }
 
 
-    override fun selectLyrics2(trackId: Long):  SongLyricsEntity {
+    override fun selectLyrics2(trackId: Long):  LiveData<SongLyricsEntity> {
         return database.lyricsDao().selectLyrics(trackId)
     }
 
     override fun selectSong2(trackId: Int):
-            TopSongsEntity = database.topSongsDao().selectSongById(trackId)
+            LiveData<TopSongsEntity> = database.topSongsDao().selectSongById(trackId)
 
 }

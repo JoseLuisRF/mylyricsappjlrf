@@ -3,9 +3,8 @@ package com.example.joseramos.lyricsappjlrf.di.modules
 import android.app.Application
 import android.arch.persistence.room.Room
 import android.content.Context
+import android.content.res.Resources
 import com.example.joseramos.lyricsappjlrf.AppExecutors
-import com.example.joseramos.lyricsappjlrf.DiskIOThreadExecutor
-import com.example.joseramos.lyricsappjlrf.MainThreadExecutor
 import com.example.joseramos.lyricsappjlrf.UIThread
 import com.example.joseramos.lyricsappjlrf.data.api.MusicMatchApi
 import com.example.joseramos.lyricsappjlrf.data.api.factory.ServiceFactory
@@ -17,10 +16,8 @@ import com.example.joseramos.lyricsappjlrf.domain.executor.PostExecutionThread
 import com.example.joseramos.lyricsappjlrf.domain.executor.ThreadExecutor
 import com.example.joseramos.lyricsappjlrf.presentation.utils.DeviceUtils
 import com.example.joseramos.lyricsappjlrf.presentation.utils.PermissionsManager
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import java.util.concurrent.Executor
 import javax.inject.Singleton
 
 @Module
@@ -31,6 +28,13 @@ class ApplicationModule() {
     internal fun providesApplicationContext(application: Application): Context {
         return application.applicationContext
     }
+
+    @Provides
+    @Singleton
+    internal fun providesResources(application: Application): Resources {
+        return application.resources
+    }
+
 
     @Provides
     @Singleton

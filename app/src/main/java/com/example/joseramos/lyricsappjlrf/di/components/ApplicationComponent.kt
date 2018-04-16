@@ -3,6 +3,7 @@ package com.example.joseramos.lyricsappjlrf.di.components
 
 import android.app.Application
 import android.content.Context
+import android.content.res.Resources
 import com.example.joseramos.lyricsappjlrf.MyLyricsApplication
 import com.example.joseramos.lyricsappjlrf.data.api.MusicMatchApi
 import com.example.joseramos.lyricsappjlrf.data.database.AppDataBase
@@ -47,6 +48,7 @@ interface ApplicationComponent {
 
     fun musicMatchApi(): MusicMatchApi
 
-    fun inject(application: MyLyricsApplication)
+    fun resources(): Resources
 
+    fun inject(application: MyLyricsApplication)
 }

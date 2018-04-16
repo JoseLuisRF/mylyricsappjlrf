@@ -22,7 +22,6 @@ const val BUNDLE_TRACK_ID = "track_id"
 class LyricsFragment : OnBackPressListener, BaseFragment() {
 
     lateinit var binding: FragmentLyricsScreenBinding
-    private var trackId: Int = 0
     lateinit var viewModel: LyricsViewModel
 
     @Inject
@@ -37,7 +36,6 @@ class LyricsFragment : OnBackPressListener, BaseFragment() {
         binding = DataBindingUtil.inflate<FragmentLyricsScreenBinding>(inflater, R.layout.fragment_lyrics_screen, container, false)
         return binding.root
     }
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -64,8 +62,8 @@ class LyricsFragment : OnBackPressListener, BaseFragment() {
 
     override fun onBackPressed() {
         activity.finish()
+//        navigator.navigateToMainActivity()
     }
-
 
     companion object {
 

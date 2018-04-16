@@ -6,7 +6,9 @@ import com.example.joseramos.lyricsappjlrf.data.api.model.TrackResponse
 import com.example.joseramos.lyricsappjlrf.data.database.entity.SongLyricsEntity
 import com.example.joseramos.lyricsappjlrf.data.database.entity.TopSongsEntity
 import com.example.joseramos.lyricsappjlrf.domain.models.LyricsModel
+import com.example.joseramos.lyricsappjlrf.domain.models.TopSongsModel
 import com.example.joseramos.lyricsappjlrf.domain.models.TrackModel
+import com.example.joseramos.lyricsappjlrf.presentation.models.LyricsUIViewModel
 import com.example.joseramos.lyricsappjlrf.presentation.models.LyricsUiModel
 import com.example.joseramos.lyricsappjlrf.presentation.models.TrackUIModel
 import javax.inject.Inject
@@ -108,15 +110,22 @@ class MusicDataMapper @Inject constructor() {
 
     fun convertTo(model: LyricsModel, errorMessage: String? = null): LyricsUiModel {
         val response = LyricsUiModel()
-
-        Log.d("JLRF", "model.lyricsBody: ${model.lyricsBody}")
-
-        response.songLyrics = model.lyricsBody
-        if (!errorMessage.isNullOrEmpty()) {
-            response.hasError(errorMessage.toString())
+        if (model.error || errorMessage != null) {
+            response.setError(errorMessage.toString())
         }
-        Log.d("JLRF", "response: $response")
+
+        response.songLyrics  = model.lyricsBody
         return response
+    }
+
+
+    fun convertTo(model: TopSongsModel, errorMessage: String? = null): LyricsUIViewModel {
+        val uiModel = LyricsUIViewModel()
+        if (model.error || errorMessage != null) {
+            uiModel.setError(model.message)
+        }
+        uiModel.topSongs.addAll(model.tracks.map { convertToUIModel(it) })
+        return uiModel
     }
 
     fun convert(entity: SongLyricsEntity): LyricsModel {

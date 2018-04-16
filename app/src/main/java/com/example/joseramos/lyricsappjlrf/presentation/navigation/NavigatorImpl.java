@@ -29,6 +29,7 @@ public class NavigatorImpl implements Navigator {
     public void navigateToMainActivity() {
         mNavigatorManager.clearBackStack();
         Intent intent = new Intent(mContext, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         mContext.startActivity(intent);
     }
 
