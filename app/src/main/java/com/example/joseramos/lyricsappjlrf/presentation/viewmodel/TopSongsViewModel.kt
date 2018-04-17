@@ -15,7 +15,6 @@ class TopSongsViewModel @Inject constructor(
     private var topSongs: LiveData<LyricsUIViewModel>
 
     init {
-
         topSongs = Transformations.map(musicRepository.fetchTopSongs(), { response ->
             dataMapper.convertTo(response)
         })

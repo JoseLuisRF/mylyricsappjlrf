@@ -54,7 +54,7 @@ class MusicRepositoryImpl @Inject constructor(
 
     override fun fetchLyrics(trackId: Int): LiveData<LyricsModel> {
         val mediatorResponse = MediatorLiveData<LyricsModel>()
-        val entityLiveData = musicDiskDataSource.selectSong2(trackId);
+        val entityLiveData = musicDiskDataSource.selectSong2(trackId)
         mediatorResponse.addSource(entityLiveData, { trackEntity ->
             if (trackEntity != null) {
                 if (deviceUtils.isNetworkAvailable) {

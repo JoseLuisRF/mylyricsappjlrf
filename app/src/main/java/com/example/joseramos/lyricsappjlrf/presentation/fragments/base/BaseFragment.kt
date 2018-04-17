@@ -9,10 +9,9 @@ import com.example.joseramos.lyricsappjlrf.di.components.FragmentComponent
 import com.example.joseramos.lyricsappjlrf.presentation.activities.base.BaseActivity
 import com.example.joseramos.lyricsappjlrf.presentation.navigation.Navigator
 
-abstract class BaseFragment : Fragment() , Injectable {
+abstract class BaseFragment : Fragment(), Injectable {
 
     protected lateinit var userComponent: FragmentComponent
-
     protected lateinit var navigator: Navigator
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
