@@ -32,7 +32,7 @@ class TopSongsFragment : BaseFragment(), TopSongsView, OnBackPressListener {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val trackModelTracksAdapterListener = TracksAdapter.TracksAdapterListener<TrackUIModel> { view, position, (trackId) -> navigator.navigateToSecondLevelActivity(trackId) }
+    private val trackModelTracksAdapterListener = TracksAdapter.TracksAdapterListener<TrackUIModel> { _, _, (trackId) -> navigator.navigateToSecondLevelActivity(trackId) }
 
     override fun onAttach(context: Context?) {
         //TODO: Implement [AndroidSupportInjection] to avoid injection in the class

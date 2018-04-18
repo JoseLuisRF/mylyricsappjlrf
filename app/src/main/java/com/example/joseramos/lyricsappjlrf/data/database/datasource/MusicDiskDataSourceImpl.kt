@@ -25,4 +25,7 @@ class MusicDiskDataSourceImpl @Inject constructor(private val database: AppDataB
     override fun selectSong2(trackId: Int):
             LiveData<TopSongsEntity> = database.topSongsDao().selectSongById(trackId)
 
+    override fun selectAllSongs(): LiveData<List<TopSongsEntity>> {
+        return database.topSongsDao().selectAll()
+    }
 }

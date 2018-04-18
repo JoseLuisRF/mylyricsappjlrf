@@ -21,7 +21,7 @@ interface TopSongsDao : BaseDao<TopSongsEntity> {
     fun insertAll2(entities: List<TopSongsEntity>): List<Long>
 
     @Query("select * from  $TABLE_NAME_TOP_SONGS ")
-    fun selectAll(): List<TopSongsEntity>
+    fun selectAll(): LiveData<List<TopSongsEntity>>
 
     @Query("select * from  $TABLE_NAME_TOP_SONGS where $COLUMN_TRACK_ID = :trackId ")
     fun selectSongById(trackId: Int): LiveData<TopSongsEntity>

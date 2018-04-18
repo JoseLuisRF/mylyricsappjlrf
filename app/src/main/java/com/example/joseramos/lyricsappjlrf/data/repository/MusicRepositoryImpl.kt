@@ -2,6 +2,7 @@ package com.example.joseramos.lyricsappjlrf.data.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
+import android.arch.lifecycle.Transformations
 import com.example.joseramos.lyricsappjlrf.AppExecutors
 import com.example.joseramos.lyricsappjlrf.data.repository.datasource.MusicCloudDataSource
 import com.example.joseramos.lyricsappjlrf.data.repository.datasource.MusicDiskDataSource
@@ -20,6 +21,10 @@ class MusicRepositoryImpl @Inject constructor(
         private val dataMapper: MusicDataMapper,
         private val appExecutors: AppExecutors) : MusicRepository {
 
+    override fun insertTopSongs(topSongsModel: TopSongsModel): List<Long> {
+        return musicDiskDataSource.insertTopSong2(topSongsModel.tracks.map { dataMapper.convert(it) })
+    }
+
     override fun fetchTopSongs(): LiveData<TopSongsModel> {
         val responseMediatorLiveData = MediatorLiveData<TopSongsModel>()
 
@@ -27,11 +32,6 @@ class MusicRepositoryImpl @Inject constructor(
             responseMediatorLiveData.addSource(musicCloudDataSource.getTopSongs("mx"), { apiResponse ->
                 if (apiResponse != null && apiResponse.isSuccessful && apiResponse.body != null) {
                     val models = apiResponse.body.message.body.trackList.map { trackWrapper -> dataMapper.convert(trackWrapper.track) }
-
-                    appExecutors.diskIO.execute {
-                        val entities = models.map { trackWrapper -> dataMapper.convert(trackWrapper) }
-                        musicDiskDataSource.insertTopSong2(entities)
-                    }
 
                     val topSongsModel = TopSongsModel()
                     topSongsModel.tracks.addAll(models)
@@ -50,6 +50,14 @@ class MusicRepositoryImpl @Inject constructor(
         }
 
         return responseMediatorLiveData
+    }
+
+    override fun selectTopSongs(): LiveData<TopSongsModel> {
+        return Transformations.map(musicDiskDataSource.selectAllSongs(), { entities ->
+            val model = TopSongsModel()
+            model.tracks.addAll(entities.map { entity -> dataMapper.convert(entity) })
+            model
+        })
     }
 
     override fun fetchLyrics(trackId: Int): LiveData<LyricsModel> {

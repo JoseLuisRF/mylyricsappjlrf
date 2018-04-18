@@ -14,4 +14,6 @@ interface MusicDiskDataSource {
     fun selectLyrics2(trackId: Long): LiveData<SongLyricsEntity>
 
     fun selectSong2(trackId: Int): LiveData<TopSongsEntity>
+
+    fun selectAllSongs(): LiveData<List<TopSongsEntity>>
 }

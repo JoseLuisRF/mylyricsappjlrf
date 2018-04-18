@@ -31,7 +31,8 @@ ext {
     gsonPackage = ""
 
     //Dependency
-    mockitoDependency = "mockito-inline" //old mockito mockito-core
+    mockitoInline = "mockito-inline" //old mockito mockito-core
+    mockitoCore = "mockito-core" //old mockito mockito-core
 
 
 
@@ -92,7 +93,7 @@ ext {
 
     testDependencies = [
             JUnit                   : "junit:junit:${jUnitVersion}",
-            Mockito                 : buildDependency(mockitoPackage,mockitoDependency,mockitoVersion),
+            Mockito                 : buildDependency(mockitoPackage,mockitoCore,mockitoVersion),
             MockitoKotlin           : "com.nhaarman:mockito-kotlin:${mockitokotlinVersion}",
             KotlinReflect           : "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}",
             EspressoCore            : "com.android.support.test.espresso:espresso-core:${espressoCoreVersion}"
