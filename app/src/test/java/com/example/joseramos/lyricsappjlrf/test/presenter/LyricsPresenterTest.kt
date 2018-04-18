@@ -1,3 +1,4 @@
+/*
 package com.example.joseramos.lyricsappjlrf.test.presenter
 
 import com.example.joseramos.lyricsappjlrf.presentation.utils.DeviceUtils
@@ -8,6 +9,7 @@ import org.mockito.ArgumentMatchers
 import org.mockito.Mockito
 import org.mockito.Mockito.verify
 
+@Deprecated
 class LyricsPresenterTest {
 
 
@@ -34,4 +36,4 @@ class LyricsPresenterTest {
     }
 
 
-}
+}*/
