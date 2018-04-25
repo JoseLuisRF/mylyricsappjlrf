@@ -33,36 +33,37 @@ import com.example.joseramos.lyricsappjlrf.domain.models.base.BaseModel
  * @param <ResultType>
  * @param <RequestType>
 </RequestType></ResultType> */
-abstract class NetworkBoundResource<DiskType : BaseModel, CloudType : BaseModel> @MainThread internal constructor(private val appExecutors: AppExecutors) {
+abstract class NetworkBoundResource<DomainModel : BaseModel, T> @MainThread internal constructor(private val appExecutors: AppExecutors) {
 
-    private val result = MediatorLiveData<Resource<DiskType>>()
+    private val result = MediatorLiveData<DomainModel>()
 
-    fun init(loading: DiskType) {
-
-        result.setValue(Resource.loading(loading))
-        val dbSource = loadFromDb()
+    fun execute(loading: DomainModel, params: T) : LiveData<DomainModel> {
+        result.setValue(loading)
+        val dbSource = loadFromDb(params)
         result.addSource(dbSource) { data ->
             result.removeSource(dbSource)
             if (shouldFetch(data)) {
-                fetchFromNetwork(dbSource)
+                fetchFromNetwork(dbSource, params)
             } else {
-                result.addSource(dbSource) { newData -> setValue(Resource.success(newData!!)) }
+                result.addSource(dbSource) { newData -> setValue(newData!!) }
             }
         }
+
+        return result
 
     }
 
     @MainThread
-    private fun setValue(newValue: Resource<DiskType>) {
+    private fun setValue(newValue: DomainModel) {
         if (result.value != newValue) {
             result.value = newValue
         }
     }
 
-    private fun fetchFromNetwork(dbSource: LiveData<DiskType>) {
-        val apiResponse = createCall()
+    private fun fetchFromNetwork(dbSource: LiveData<DomainModel>, params: T) {
+        val apiResponse = createCall(params)
         // we re-attach dbSource as a new source, it will dispatch its latest value quickly
-        result.addSource(dbSource) { newData -> setValue(Resource.loading(newData!!)) }
+        result.addSource(dbSource) { newData -> setValue(newData!!) }
         result.addSource(apiResponse) { response ->
             result.removeSource(apiResponse)
             result.removeSource(dbSource)
@@ -74,11 +75,11 @@ abstract class NetworkBoundResource<DiskType : BaseModel, CloudType : BaseModel>
                         // we specially request a new live data,
                         // otherwise we will get immediately last cached value,
                         // which may not be updated with latest results received from network.
-                        result.addSource(loadFromDb()) { newData -> setValue(Resource.success(newData!!)) }
+                        result.addSource(loadFromDb(params)) { newData -> setValue(newData!!) }
                     }
                 })
             } else {
-                result.addSource(dbSource, { newData -> setValue(Resource.error(response!!.message, newData!!)) })
+                result.addSource(dbSource, { newData -> setValue(newData!!) })
             }
         }
     }
@@ -86,24 +87,25 @@ abstract class NetworkBoundResource<DiskType : BaseModel, CloudType : BaseModel>
     protected fun onFetchFailed() {
     }
 
-    fun asLiveData(): LiveData<Resource<DiskType>> {
+    @Deprecated("because yes")
+    fun asLiveData(): LiveData<DomainModel> {
         return result
     }
 
     @WorkerThread
-    protected open fun processResponse(response: CloudType): CloudType {
+    protected open fun processResponse(response: DomainModel): DomainModel {
         return response
     }
 
     @WorkerThread
-    protected abstract fun saveCallResult(item: CloudType)
+    protected abstract fun saveCallResult(item: DomainModel)
 
     @MainThread
-    protected abstract fun shouldFetch(data: DiskType?): Boolean
+    protected abstract fun shouldFetch(data: DomainModel?): Boolean
 
     @MainThread
-    protected abstract fun loadFromDb(): LiveData<DiskType>
+    protected abstract fun loadFromDb(params: T): LiveData<DomainModel>
 
     @MainThread
-    protected abstract fun createCall(): LiveData<CloudType>
+    protected abstract fun createCall(params: T): LiveData<DomainModel>
 }

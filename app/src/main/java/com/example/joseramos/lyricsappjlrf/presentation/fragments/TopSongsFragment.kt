@@ -54,9 +54,28 @@ class TopSongsFragment : BaseFragment(), TopSongsView, OnBackPressListener {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(TopSongsViewModel::class.java)
 
         viewModel.loadTopSongs().observe(this, Observer { response ->
-            adapter = TracksAdapter(response?.topSongs)
-            binding.rvTopSongs.adapter = adapter
-            adapter!!.setTrackAdapterListener(trackModelTracksAdapterListener)
+
+            when (response?.status) {
+                "SUCCESS" -> {
+                    binding.rvTopSongs.visibility = View.VISIBLE
+                    binding.pbLoader.visibility = View.GONE
+                    adapter = TracksAdapter(response?.topSongs)
+                    binding.rvTopSongs.adapter = adapter
+                    adapter!!.setTrackAdapterListener(trackModelTracksAdapterListener)
+                }
+                "LOADING" -> {
+                    binding.rvTopSongs.visibility = View.GONE
+                    binding.pbLoader.visibility = View.VISIBLE
+
+                }
+                "ERROR" -> {
+                    //TODO: Show error
+                    binding.pbLoader.visibility = View.GONE
+                    binding.rvTopSongs.visibility = View.GONE
+
+                }
+            }
+
          })
     }
 

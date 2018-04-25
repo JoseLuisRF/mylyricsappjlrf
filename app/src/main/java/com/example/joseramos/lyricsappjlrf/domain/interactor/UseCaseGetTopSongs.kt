@@ -8,14 +8,15 @@ import com.example.joseramos.lyricsappjlrf.domain.repository.MusicRepository
 import javax.inject.Inject
 
 class UseCaseGetTopSongs @Inject constructor(private val appExecutors: AppExecutors,
-                                             private val musicRepository: MusicRepository) : NetworkBoundResource<TopSongsModel, TopSongsModel>(appExecutors) {
+                                             private val musicRepository: MusicRepository) : NetworkBoundResource<TopSongsModel, UseCaseGetTopSongs.Params>(appExecutors) {
+//
+//    execute {
+//        val model = TopSongsModel()
+//        model.status = "LOADING"
+//        model.error = false
+//        execute(model, Params())
+//    }
 
-    init {
-        //FIXME: Replace Result Object for BaseModel
-        val loading = TopSongsModel()
-        loading.status = "LOADING"
-        init(loading)
-    }
 
     override fun saveCallResult(item: TopSongsModel) {
         musicRepository.insertTopSongs(item)
@@ -25,11 +26,15 @@ class UseCaseGetTopSongs @Inject constructor(private val appExecutors: AppExecut
         return data == null || data.tracks.isEmpty()
     }
 
-    override fun loadFromDb(): LiveData<TopSongsModel> {
+    override fun loadFromDb(params: UseCaseGetTopSongs.Params): LiveData<TopSongsModel> {
         return musicRepository.selectTopSongs()
     }
 
-    override fun createCall(): LiveData<TopSongsModel> {
+    override fun createCall(params: UseCaseGetTopSongs.Params): LiveData<TopSongsModel> {
         return musicRepository.fetchTopSongs()
     }
+
+
+    //FIXME: Need to define default params when no parameters needed
+    class Params
 }

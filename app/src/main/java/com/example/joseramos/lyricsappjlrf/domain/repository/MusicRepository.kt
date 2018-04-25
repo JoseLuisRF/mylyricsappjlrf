@@ -15,4 +15,8 @@ interface MusicRepository {
 
     fun insertTopSongs(topSongsModel: TopSongsModel): List<Long>
 
+    fun selectLyrics(songId: Int): LiveData<LyricsModel>
+
+    fun insertLyrics(item: LyricsModel)
+
 }

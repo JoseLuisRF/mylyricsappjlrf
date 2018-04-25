@@ -5,6 +5,7 @@ import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import com.example.joseramos.lyricsappjlrf.data.repository.mappers.MusicDataMapper
 import com.example.joseramos.lyricsappjlrf.domain.interactor.UseCaseGetTopSongs
+import com.example.joseramos.lyricsappjlrf.domain.models.TopSongsModel
 import com.example.joseramos.lyricsappjlrf.presentation.models.LyricsUIViewModel
 import javax.inject.Inject
 
@@ -15,9 +16,11 @@ class TopSongsViewModel @Inject constructor(
     private var topSongs: LiveData<LyricsUIViewModel>
 
     init {
-        topSongs = Transformations.map(useCaseGetTopSongs.asLiveData(), { response ->
+
+        topSongs = Transformations.map(useCaseGetTopSongs.execute(TopSongsModel(), UseCaseGetTopSongs.Params()), { response ->
             //FIXME: Use Result Class to show STATUS on the UI
-            dataMapper.convertTo(response.data)
+            dataMapper.convertTo(response)
+
         })
     }
 

@@ -8,9 +8,6 @@ import com.example.joseramos.lyricsappjlrf.data.api.model.BaseResponse
 import com.example.joseramos.lyricsappjlrf.data.api.model.GetTopSongsResponse
 import com.example.joseramos.lyricsappjlrf.data.api.model.LyricsWrapperResponse
 import com.example.joseramos.lyricsappjlrf.data.repository.datasource.MusicCloudDataSource
-import io.reactivex.Flowable
-import retrofit2.Call
-import retrofit2.Response
 import javax.inject.Inject
 
 

@@ -12,5 +12,6 @@ open class BaseModel {
         this.error = true
         this.status = "ERROR"
     }
+
 }
 

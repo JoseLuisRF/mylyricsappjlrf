@@ -96,4 +96,14 @@ class MusicRepositoryImpl @Inject constructor(
         })
         return mediatorResponse
     }
+
+    override fun selectLyrics(songId: Int): LiveData<LyricsModel> {
+        return Transformations.map(musicDiskDataSource.selectLyrics2(songId.toLong()), { entity ->
+            dataMapper.convert(entity)
+        })
+    }
+
+    override fun insertLyrics(item: LyricsModel) {
+        musicDiskDataSource.insertLyrics2(dataMapper.convert(item))
+    }
 }
